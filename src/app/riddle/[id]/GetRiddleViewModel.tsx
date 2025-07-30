@@ -14,7 +14,7 @@ export function getRiddleViewModel(params: {
         [riddle.answers],
     );
 
-    let isCorrect = correct?.id === selected;
+    let isCorrect = selected && correct?.id === selected;
     let isWrong = selected && correct && !isCorrect;
 
     return {correct, selected, random: correct ? random : undefined, sorted, isCorrect, isWrong}
