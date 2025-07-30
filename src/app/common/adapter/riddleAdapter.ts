@@ -8,3 +8,9 @@ export async function fetchRandomRiddle(id?: string): Promise<Riddle> {
     return fetch(`http://localhost:3000/api/random-riddle?${params}`)
         .then((response) => response.json())
 }
+
+export async function fetchRiddleAnswers(id: string) {
+    const response = await fetch(`http://localhost:3000/api/riddle/${id}`);
+    const riddle: Riddle = await response.json();
+    return riddle;
+}

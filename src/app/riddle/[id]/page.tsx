@@ -1,5 +1,5 @@
-import { Riddle } from '../../domain/RiddleService';
-import { RiddleAnswers } from './RiddleAnswers';
+import {RiddleAnswers} from './RiddleAnswers';
+import {fetchRiddleAnswers} from "@/app/common/adapter/riddleAdapter";
 
 export default async function RiddlePage({
     params,
@@ -7,8 +7,7 @@ export default async function RiddlePage({
     params: Promise<{ id: string }>;
 }) {
     const id = (await params).id;
-    const response = await fetch(`http://localhost:3000/api/riddle/${id}`);
-    const riddle: Riddle = await response.json();
+    const riddle = await fetchRiddleAnswers(id);
 
     return (
         <main className="text-lg">

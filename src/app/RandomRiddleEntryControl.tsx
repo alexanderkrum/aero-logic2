@@ -2,7 +2,7 @@
 
 import {useRouter} from 'next/navigation';
 import {useEffect, useState} from 'react';
-import {fetchRandomRiddle} from "@/app/domain/riddleAdapter";
+import {fetchRandomRiddle} from "@/app/common/adapter/riddleAdapter";
 
 export const RandomRiddleEntryControl = () => {
     const router = useRouter();
