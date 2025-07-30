@@ -1,7 +1,7 @@
 import {Riddle} from "@/app/domain/RiddleService";
 import {useEffect, useState} from "react";
 import {getAnswerFor} from "../../../../packages/riddle-exam";
-import {fetchRandomRiddle} from "@/app/common/adapter/riddleAdapter";
+import {fetchRandomRiddle} from "@/app/common/adapter/RiddleAdapter";
 import {getRiddleViewModel} from "@/app/riddle/[id]/GetRiddleViewModel";
 
 export function useRiddleAnswers(riddle: Riddle) {

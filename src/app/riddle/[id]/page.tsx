@@ -1,5 +1,5 @@
 import {RiddleAnswers} from './RiddleAnswers';
-import {fetchRiddleAnswers} from "@/app/common/adapter/RiddleAdapter";
+import {fetchRiddleById} from "@/app/common/adapter/RiddleAdapter";
 
 export default async function RiddlePage({
     params,
@@ -7,7 +7,7 @@ export default async function RiddlePage({
     params: Promise<{ id: string }>;
 }) {
     const id = (await params).id;
-    const riddle = await fetchRiddleAnswers(id);
+    const riddle = await fetchRiddleById(id);
 
     return (
         <main className="text-lg">
