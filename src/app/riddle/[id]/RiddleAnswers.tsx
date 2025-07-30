@@ -1,43 +1,16 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
-import { getAnswerFor } from 'riddle-exam';
-import { Riddle } from '../../domain/RiddleService';
+import {Riddle} from '../../domain/RiddleService';
 import classNames from 'classnames';
 import Link from 'next/link';
+import {useRiddleAnswers} from "@/app/riddle/[id]/UseRiddleAnswers";
 
 type Props = {
     riddle: Riddle;
 };
 
 export const RiddleAnswers = ({ riddle }: Props) => {
-    const [correct, setCorrect] = useState<{ id: string }>();
-    const [selected, setSelected] = useState<string>();
-    const [random, setRandom] = useState<string>();
-    const handleClick = async (id: string) => {
-        if (selected) {
-            return;
-        }
-
-        setSelected(id);
-
-        const data = await getAnswerFor(riddle.id);
-
-        setCorrect(data);
-    };
-
-    const sorted = useMemo(
-        () => riddle.answers.toSorted(() => Math.random() - 0.5),
-        [riddle.answers],
-    );
-
-    useEffect(() => {
-        fetch(`http://localhost:3000/api/random-riddle?excluded=${riddle.id}`)
-            .then((response) => response.json())
-            .then(({ id }) => {
-                setRandom(id);
-            });
-    }, []);
+    const {correct, selected, random, handleClick, sorted, isCorrect, isWrong} = useRiddleAnswers(riddle);
 
     return (
         <>
@@ -64,17 +37,17 @@ export const RiddleAnswers = ({ riddle }: Props) => {
                     </li>
                 ))}
             </ul>
-            {selected && correct && selected === correct.id && (
+            {isCorrect && (
                 <div className="bg-green-400 my-6 p-3">
                     {"Great job! You're right 🙏"}
                 </div>
             )}
-            {selected && correct && selected !== correct.id && (
+            {isWrong && (
                 <div className="bg-red-300  my-6 p-3">
                     {'This time your answer is wrong.'}
                 </div>
             )}
-            {correct && random && (
+            {random && (
                 <div className="mt-5">
                     <Link href={`/riddle/${random}`} className="underline">
                         Play one more

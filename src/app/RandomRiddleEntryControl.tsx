@@ -1,7 +1,8 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import {useRouter} from 'next/navigation';
+import {useEffect, useState} from 'react';
+import {fetchRandomRiddle} from "@/app/domain/riddleAdapter";
 
 export const RandomRiddleEntryControl = () => {
     const router = useRouter();
@@ -11,11 +12,8 @@ export const RandomRiddleEntryControl = () => {
     };
 
     useEffect(() => {
-        fetch('http://localhost:3000/api/random-riddle')
-            .then((response) => response.json())
-            .then((riddle) => {
-                setId(riddle.id);
-            });
+        fetchRandomRiddle()
+            .then(riddle => setId(riddle.id));
     }, []);
 
     if (!id) {
