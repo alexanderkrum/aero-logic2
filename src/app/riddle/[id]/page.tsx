@@ -1,5 +1,5 @@
 import {RiddleAnswers} from './RiddleAnswers';
-import {fetchRiddleAnswers} from "@/app/common/adapter/riddleAdapter";
+import {fetchRiddleAnswers} from "@/app/common/adapter/RiddleAdapter";
 
 export default async function RiddlePage({
     params,
