@@ -1,7 +1,7 @@
 import {Riddle} from "@/app/domain/RiddleService";
 import {useMemo} from "react";
 
-export function getRiddleViewModel(params: {
+export function getRiddleViewModelService(params: {
     correct: { id: string } | undefined;
     selected: string | undefined;
     random: string | undefined;

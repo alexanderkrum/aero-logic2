@@ -1,5 +1,5 @@
 import {RiddleAnswers} from './RiddleAnswers';
-import {fetchRiddleById} from "@/app/common/adapter/RiddleAdapter";
+import {getPageViewModel} from "@/app/riddle/[id]/PageViewModelService";
 
 export default async function RiddlePage({
     params,
@@ -7,7 +7,7 @@ export default async function RiddlePage({
     params: Promise<{ id: string }>;
 }) {
     const id = (await params).id;
-    const riddle = await fetchRiddleById(id);
+    const {riddle} = await getPageViewModel(id);
 
     return (
         <main className="text-lg">

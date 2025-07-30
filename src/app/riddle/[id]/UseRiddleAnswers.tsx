@@ -2,7 +2,7 @@ import {Riddle} from "@/app/domain/RiddleService";
 import {useEffect, useState} from "react";
 import {getAnswerFor} from "../../../../packages/riddle-exam";
 import {fetchRandomRiddle} from "@/app/common/adapter/RiddleAdapter";
-import {getRiddleViewModel} from "@/app/riddle/[id]/GetRiddleViewModel";
+import {getRiddleViewModelService} from "@/app/riddle/[id]/GetRiddleViewModelService";
 
 export function useRiddleAnswers(riddle: Riddle) {
     const [correct, setCorrect] = useState<{ id: string }>();
@@ -24,7 +24,7 @@ export function useRiddleAnswers(riddle: Riddle) {
         fetchRandomRiddle(riddle.id).then(riddle => setRandom(riddle.id))
     }, []);
 
-    let viewModel = getRiddleViewModel({
+    let viewModel = getRiddleViewModelService({
         correct, selected, random, riddle
     })
     return {...viewModel, handleClick};
