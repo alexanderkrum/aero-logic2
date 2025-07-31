@@ -37,6 +37,8 @@ export function getTestFakesFrom(headers: ReadonlyHeaders) {
             fakes.set(key, value);
         }
     }
+    console.log('XXXX', fakes);
+    console.log('YYYYY', Array.from(map));
 
     return fakes;
 }

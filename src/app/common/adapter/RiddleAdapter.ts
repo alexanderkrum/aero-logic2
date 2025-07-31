@@ -1,15 +1,17 @@
-import {Riddle} from "@/app/domain/RiddleService";
+import { Riddle } from '@/app/domain/RiddleService';
+import { createClientAdapter } from './ClientAdapterFactory';
 
-export async function fetchRandomRiddle(id?: string): Promise<Riddle> {
-    const params = new URLSearchParams()
+export const useRetrieveRandomRiddle = createClientAdapter<Riddle, string | undefined>({
+    name: 'use-retrieve-random-riddle',
+    callback: fetchRandomRiddle,
+});
+
+async function fetchRandomRiddle(id?: string): Promise<Riddle> {
+    const params = new URLSearchParams();
     if (id) {
-        params.set("excluded", id)
+        params.set('excluded', id);
     }
-    return fetch(`http://localhost:3000/api/random-riddle?${params}`)
-        .then((response) => response.json())
-}
-
-export async function fetchRiddleById(id: string): Promise<Riddle> {
-    const response = await fetch(`http://localhost:3000/api/riddle/${id}`);
-    return  await response.json();
+    return fetch(`http://localhost:3000/api/random-riddle?${params}`).then((response) =>
+        response.json(),
+    );
 }

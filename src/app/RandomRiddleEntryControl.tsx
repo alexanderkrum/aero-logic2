@@ -2,17 +2,18 @@
 
 import {useRouter} from 'next/navigation';
 import {useEffect, useState} from 'react';
-import {fetchRandomRiddle} from "@/app/common/adapter/RiddleAdapter";
+import { useRetrieveRandomRiddle } from "@/app/common/adapter/RiddleAdapter";
 
 export const RandomRiddleEntryControl = () => {
     const router = useRouter();
+    const { getData } = useRetrieveRandomRiddle();
     const [id, setId] = useState<string>();
     const handleClick = () => {
         router.push(`/riddle/${id}`);
     };
 
     useEffect(() => {
-        fetchRandomRiddle()
+        getData()
             .then(riddle => setId(riddle.id));
     }, []);
 
@@ -21,7 +22,7 @@ export const RandomRiddleEntryControl = () => {
     }
 
     return (
-        <button onClick={handleClick} className="border border-blue-500 p-5">
+        <button data-test="open-random-riddle-control" onClick={handleClick} className="border border-blue-500 p-5">
             Resolve random riddle
         </button>
     );

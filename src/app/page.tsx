@@ -7,7 +7,7 @@ export default function Home() {
     return (
         <main className="text-lg">
             <div>
-                <p>Work Interval: {workInterval}</p>
+                <p data-test="work-interval">Work Interval: {workInterval}</p>
                 <p>
                     Timestamp: {timeStamp}
                 </p>
